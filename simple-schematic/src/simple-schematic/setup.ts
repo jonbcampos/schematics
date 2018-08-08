@@ -2,9 +2,8 @@ import {getWorkspace} from '@schematics/angular/utility/config';
 import {buildDefaultPath} from '@schematics/angular/utility/project';
 import {parseName} from '@schematics/angular/utility/parse-name';
 import {Tree} from '@angular-devkit/schematics';
-import {Schema} from "./schema";
 
-export function setupOptions(host: Tree, options: Schema): Tree {
+export function setupOptions(host: Tree, options: any): Tree {
     const workspace = getWorkspace(host);
     if (!options.project) {
         options.project = Object.keys(workspace.projects)[0];

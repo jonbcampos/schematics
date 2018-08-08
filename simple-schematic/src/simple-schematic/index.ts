@@ -13,12 +13,11 @@ import {
 import {normalize} from '@angular-devkit/core';
 import {setupOptions} from "./setup";
 import {strings} from '@angular-devkit/core';
-import {Schema} from "./schema";
 
 
 // You don't have to export the function as default. You can also have more than one rule factory
 // per file.
-export function simpleSchematic(options: Schema): Rule {
+export function simpleSchematic(options: any): Rule {
     return (tree: Tree, _context: SchematicContext) => {
         setupOptions(tree, options);
 
