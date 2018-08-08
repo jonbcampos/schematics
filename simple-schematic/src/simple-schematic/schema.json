@@ -29,6 +29,11 @@
             "type": "boolean",
             "description": "Specifies if a spec file is generated.",
             "default": true
+        },
+        "flat": {
+            "type": "boolean",
+            "description": "Flag to indicate if a directory is created.",
+            "default": false
         }
     },
     "required": [
