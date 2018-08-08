@@ -23,7 +23,7 @@ export function simpleSchematic(options: any): Rule {
 
         const movePath = (options.flat) ?
             normalize(options.path) :
-            normalize(options.path + strings.dasherize(options.name));
+            normalize(options.path + '/' + strings.dasherize(options.name));
 
         const templateSource = apply(url('./files'), [
             options.spec ? noop() : filter(path => !path.endsWith('.spec.ts')),
