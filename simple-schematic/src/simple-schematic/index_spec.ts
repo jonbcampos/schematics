@@ -90,6 +90,10 @@ describe('simple-schematic', () => {
             // -- or --
             expect(tree.files.indexOf("/projects/bar/src/app/test/test.spec.ts")).toBeGreaterThanOrEqual(0);
             expect(tree.files.indexOf("/projects/bar/src/app/test/test.ts")).toBeGreaterThanOrEqual(0);
+
+            expect(tree.readContent("/projects/bar/src/app/test/test.ts")).toContain("export class Test {\n" +
+                "\n" +
+                "}");
         });
 
     });
