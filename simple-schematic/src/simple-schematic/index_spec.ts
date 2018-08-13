@@ -87,6 +87,9 @@ describe('simple-schematic', () => {
                 "/projects/bar-e2e/src/app.e2e-spec.ts",
                 "/projects/bar-e2e/src/app.po.ts",
             ]);
+            // -- or --
+            expect(tree.files.indexOf("/projects/bar/src/app/test/test.spec.ts")).toBeGreaterThanOrEqual(0);
+            expect(tree.files.indexOf("/projects/bar/src/app/test/test.ts")).toBeGreaterThanOrEqual(0);
         });
 
     });
@@ -157,6 +160,9 @@ describe('simple-schematic', () => {
                 "/e2e/src/app.e2e-spec.ts",
                 "/e2e/src/app.po.ts"
             ]);
+            // -- or --
+            expect(tree.files.indexOf("/src/app/test/test.spec.ts")).toBeGreaterThanOrEqual(0);
+            expect(tree.files.indexOf("/src/app/test/test.ts")).toBeGreaterThanOrEqual(0);
         });
 
     });
