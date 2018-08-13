@@ -4,17 +4,17 @@ import * as path from 'path';
 import {Schema as WorkspaceOptions} from '@schematics/angular/workspace/schema';
 import {Schema as ApplicationOptions} from '@schematics/angular/application/schema';
 
+const collectionPath = path.join(__dirname, '../collection.json');
+const angularCollectionPath = path.join(__dirname, '..', '..',
+    'node_modules', '@schematics', 'angular', 'collection.json');
+
 describe('simple-schematic', () => {
 
     const schematicRunner = new SchematicTestRunner(
-        '@schematics/angular',
-        path.join(__dirname, '..', '..', 'node_modules', '@schematics', 'angular', 'collection.json')
-    );
+        '@schematics/angular', angularCollectionPath);
 
     const testRunner = new SchematicTestRunner(
-        'rocket',
-        path.join(__dirname, '..', 'collection.json')
-    );
+        'rocket', collectionPath);
 
     const workspaceOptions: WorkspaceOptions = {
         name: 'workspace',
