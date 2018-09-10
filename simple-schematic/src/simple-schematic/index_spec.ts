@@ -1,12 +1,10 @@
 import {Tree} from '@angular-devkit/schematics';
 import {SchematicTestRunner, UnitTestTree} from '@angular-devkit/schematics/testing';
-import * as path from 'path';
 import {Schema as WorkspaceOptions} from '@schematics/angular/workspace/schema';
 import {Schema as ApplicationOptions} from '@schematics/angular/application/schema';
 
-const collectionPath = path.join(__dirname, '../collection.json');
-const angularCollectionPath = path.join(__dirname, '..', '..',
-    'node_modules', '@schematics', 'angular', 'collection.json');
+const collectionPath = require.resolve('../collection.json');
+const angularCollectionPath = require.resolve('../../node_modules/@schematics/angular/collection.json');
 
 describe('simple-schematic', () => {
 
