@@ -9,7 +9,7 @@ export function setupOptions(host: Tree, options: any): Tree {
         options.project = Object.keys(workspace.projects)[0];
     }
     const project = workspace.projects[options.project];
-
+    
     if (options.path === undefined) {
         options.path = buildDefaultPath(project);
     }

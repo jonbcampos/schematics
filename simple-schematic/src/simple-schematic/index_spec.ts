@@ -1,15 +1,12 @@
 import {Tree} from '@angular-devkit/schematics';
+import {InvalidInputOptions} from '@angular-devkit/schematics/tools/schema-option-transform';
 import {SchematicTestRunner, UnitTestTree} from '@angular-devkit/schematics/testing';
 import {Schema as WorkspaceOptions} from '@schematics/angular/workspace/schema';
 import {Schema as ApplicationOptions} from '@schematics/angular/application/schema';
 
 const collectionPath = require.resolve('../collection.json');
-const angularCollectionPath = require.resolve('../../node_modules/@schematics/angular/collection.json');
 
 describe('simple-schematic', () => {
-
-    const schematicRunner = new SchematicTestRunner(
-        '@schematics/angular', angularCollectionPath);
 
     const testRunner = new SchematicTestRunner(
         'rocket', collectionPath);
@@ -34,16 +31,21 @@ describe('simple-schematic', () => {
 
         let appTree: UnitTestTree;
         beforeEach(() => {
-            appTree = schematicRunner.runSchematic('workspace', workspaceOptions);
-            appTree = schematicRunner.runSchematic('application', appOptions, appTree);
+            appTree = testRunner.runExternalSchematic('@schematics/angular', 'workspace', workspaceOptions);
+            appTree = testRunner.runExternalSchematic('@schematics/angular', 'application', appOptions, appTree);
         });
 
         it('fails with missing tree', () => {
-            expect(() => testRunner.runSchematic('simple-schematic', {}, Tree.empty())).toThrow();
+            expect(() => testRunner.runSchematic('simple-schematic', {
+                name: "test"
+            }, Tree.empty())).toThrow();
         });
 
         it('fails with missing params', () => {
-            expect(() => testRunner.runSchematic('simple-schematic', {}, appTree)).toThrow();
+            expect(() => testRunner.runSchematic('simple-schematic', {}, appTree)).toThrowError(InvalidInputOptions, 
+            'Schematic input does not validate against the Schema: {"spec":true,"flat":false}\n'+
+            'Errors:\n\n'+
+            '  Data path "" should have required property \'name\'.');
         });
 
         it('works', () => {
@@ -86,8 +88,8 @@ describe('simple-schematic', () => {
                 "/projects/bar-e2e/src/app.po.ts",
             ]);
             // -- or --
-            expect(tree.files.indexOf("/projects/bar/src/app/test/test.spec.ts")).toBeGreaterThanOrEqual(0);
-            expect(tree.files.indexOf("/projects/bar/src/app/test/test.ts")).toBeGreaterThanOrEqual(0);
+            expect(tree.files).toContain("/projects/bar/src/app/test/test.spec.ts");
+            expect(tree.files).toContain("/projects/bar/src/app/test/test.ts");
 
             expect(tree.readContent("/projects/bar/src/app/test/test.ts")).toContain("export class Test {\n" +
                 "\n" +
@@ -111,8 +113,8 @@ describe('simple-schematic', () => {
 
         let appTree: UnitTestTree;
         beforeEach(() => {
-            appTree = schematicRunner.runSchematic('workspace', workspaceOptions);
-            appTree = schematicRunner.runSchematic('application', appOptions, appTree);
+            appTree = testRunner.runExternalSchematic('@schematics/angular', 'workspace', workspaceOptions);
+            appTree = testRunner.runExternalSchematic('@schematics/angular', 'application', appOptions, appTree);
         });
 
         it('fails with missing tree', () => {
